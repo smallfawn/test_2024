@@ -1,58 +1,147 @@
-<script setup>
-import { ref } from 'vue';
-import { User,Lock } from '@element-plus/icons-vue'
+<template>
+    <div class="container">
+        <div class="aside">
+            <el-menu background-color="#545c64" class="menu" @select="handleSelect"
+                text-color="#fff" router :default-active="actived">
+                <div class="top">
+                    <a>
+                        <img class="top-logo" src="../assets/logo.png" />
+                        <h1 class="top-title">鹿飞管理系统</h1>
+                    </a>
 
-const form = ref({
-  type:"user",
-  username: ""
+                </div>
+                <el-menu-item index="/home/dataBoard">
+                    <el-icon><DataBoard /></el-icon>
+                    <span>控制台</span>
+                </el-menu-item>
+                <el-menu-item index="/home/setting">
+                    <el-icon><Setting /></el-icon>
+                    <span>系统设置</span>
+                </el-menu-item>
+            </el-menu>
+        </div>
+        <div class="main">
+            <div class="toggle">
+                <el-icon class="toggle-icon" size="20"><Fold /></el-icon>
+                <span>{{ text }}</span>
+            </div>
+            <RouterView />
+        </div>
+
+    </div>
+</template>
+
+<script setup>
+import {
+    Document,
+    Menu as IconMenu,
+    Location,
+    DataBoard,
+    Setting,
+    Fold
+} from '@element-plus/icons-vue'
+import { computed, ref } from 'vue';
+
+const actived = "/home/dataBoard"
+
+const current = ref("/home/dataBoard")
+
+const handleSelect = (e)=>{
+    current.value = e
+}
+
+const text = computed(()=>{
+    if(current.value === '/home/dataBoard'){
+        return '控制台'
+    }else if(current.value === '/home/setting'){
+        return '系统设置'
+    }
 })
 </script>
 
-<template>
-  <div class="login">
-    <el-form class="login-form">
-      <div class="title">
-        鹿飞后台管理系统
-      </div>
-      <el-form-item  label="类型：">
-        <el-radio-group v-model="form.type">
-          <el-radio value="user">用户登录</el-radio>
-          <el-radio value="admin">管理员登录</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="账号：">
-        <el-input v-model="form.username" :prefix-icon="User" />
-      </el-form-item>
-      <el-form-item label="密码：">
-        <el-input v-model="form.password" :prefix-icon="Lock" />
-      </el-form-item>
-      <el-form-item>
-        <el-button style="width: 100%;margin-top: 20px;" type="primary" @click="login" size="large">登录</el-button>
-      </el-form-item>
-    </el-form>
-  </div>
-</template>
-
 <style scoped>
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background-image: url(../assets/login-background.f9f49138.jpg);
-  background-size: cover;
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+
 }
 
-.login-form {
-  border-radius: 6px;
-  background: #fff;
-  width: 400px;
-  padding: 25px;
+.toggle-icon{
+    padding: 0px 15px;
+    line-height: 46px;
+    height: 100%;
+    float: left;
+    cursor: pointer;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.title {
-  margin: 0 auto 30px auto;
-  text-align: center;
-  color: #707070;
+.toggle span{
+    color: #97a8be;
+    cursor: text;
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 14px;
+}
+
+.main{
+    width: 100%;
+}
+
+.main .toggle{
+    display: block;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+    box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+}
+.aside {
+    width: 200px;
+    height: 100%;
+}
+
+.menu {
+    width: 200px;
+    height: 100%;
+    background-color: rgb(48, 65, 86);
+}
+
+.top {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgb(48, 65, 86);
+    text-align: center;
+    overflow: hidden;
+}
+
+.top a{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.top-title{
+    display: inline-block;
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
+    line-height: 50px;
+    font-size: 14px;
+    font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+    vertical-align: middle;
+}
+
+.top-logo{
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    margin-right: 12px;
 }
 </style>
