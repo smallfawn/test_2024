@@ -4,7 +4,7 @@ async function getUserInfo(data) {
         url: "/user/info",
         method: "post",
         headers: {
-            Authorization: localStorage.getItem("token"),
+            token: localStorage.getItem("token"),
             "Content-Type": "application/json",
         },
         data
@@ -64,6 +64,7 @@ async function updateConfig(data) {
         url: "/config/update",
         method: "post",
         headers: {
+            token: localStorage.getItem("token"),
             "Content-Type": "application/json",
         },
         data,
