@@ -26,7 +26,7 @@ export const useCounterStore = defineStore('counter', () => {
   const configTemplate = ref({})
   const wxpuserToken = ref('')
   const wxpuserUid = ref('')
-  const wxpuserUidAdmin = ref([])
+  const wxpuserUidAdmin = ref('')
   //定义公告
   const notice = ref('')
   //定义网站名字
