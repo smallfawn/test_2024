@@ -1,20 +1,23 @@
 <script setup>
 import { ref } from 'vue';
-import { User,Lock } from '@element-plus/icons-vue'
+import { User, Lock } from '@element-plus/icons-vue'
 
 const form = ref({
-  type:"user",
+  type: "user",
   username: ""
 })
+function login(params) {
+
+}
 </script>
 
 <template>
   <div class="login">
     <el-form class="login-form">
       <div class="title">
-        鹿飞后台管理系统
+        LuFly系统
       </div>
-      <el-form-item  label="类型：">
+      <el-form-item label="类型：">
         <el-radio-group v-model="form.type">
           <el-radio value="user">用户登录</el-radio>
           <el-radio value="admin">管理员登录</el-radio>
@@ -27,7 +30,7 @@ const form = ref({
         <el-input v-model="form.password" :prefix-icon="Lock" />
       </el-form-item>
       <el-form-item>
-        <el-button style="width: 100%;margin-top: 20px;" type="primary" @click="login" size="large">登录</el-button>
+        <el-button style="width: 100%;margin-top: 20px;" type="primary" @click="login()" size="large">登录</el-button>
       </el-form-item>
     </el-form>
   </div>

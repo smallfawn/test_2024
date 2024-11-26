@@ -9,7 +9,7 @@ const router = createRouter({
       name: '',
       component: Home,
     },
-    {
+    /*{
       path: '/AdminLogin',
       name: '管理员登录',
       component: () => import('../views/AdminLogin.vue'),
@@ -19,7 +19,7 @@ const router = createRouter({
       name: '用户登录',
 
       component: () => import('../views/UserLogin.vue'),
-    },
+    },*/
   ],
 })
 
