@@ -6,6 +6,22 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // 根据不同规则来划分代码块
+          if (id.includes('node_modules')) {
+            return 'vendor'; // 将所有来自node_modules的代码打包到'vendor'这个chunk中
+          }
+          /*if (id.includes('src/components')) {
+            return 'components'; // 将src/components目录下的代码打包到'components'这个chunk中
+          }*/
+          return 'app'; // 其他代码都打包到'app'这个chunk中
+        }
+      }
+    }
+  },
   server: {
     proxy: {
       '/api': {  // 这里的'/api'是一个示例，代表要代理的请求路径前缀，你可以根据实际需求修改
