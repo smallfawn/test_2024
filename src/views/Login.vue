@@ -1,22 +1,26 @@
 <script setup>
 import { ref } from 'vue';
-import { User,Lock } from '@element-plus/icons-vue'
+import { User, Lock } from '@element-plus/icons-vue'
 import { useRouter } from "vue-router"
-import { getLoginToken } from "@/assets/request"
+import Api from '@/utils/ReqUtils';
 const router = useRouter()
 
 const form = ref({
-  type:"user",
+  type: "user",
   username: "",
-  password:""
+  password: ""
 })
 
-const login = ()=>{
+const login = () => {
 
-  /**/ 
-  getLoginToken({username:form.value.username,password:form.value.password})
+  /**/
+  Api.login(form.value.username, form.value.password).then(res => {    
+    if (res.data.code == 0) {
+      localStorage.setItem("token", res.data.data.token)
+    }
+  })
   router.push({
-    name:'home'
+    name: 'home'
   })
 }
 
@@ -28,7 +32,7 @@ const login = ()=>{
       <div class="title">
         鹿飞后台管理系统
       </div>
-      <el-form-item  label="类型：">
+      <el-form-item label="类型：">
         <el-radio-group v-model="form.type">
           <el-radio value="user">用户登录</el-radio>
           <el-radio value="admin">管理员登录</el-radio>
@@ -41,7 +45,7 @@ const login = ()=>{
         <el-input v-model="form.password" :prefix-icon="Lock" />
       </el-form-item>
       <el-form-item>
-        <el-button style="width: 100%;margin-top: 20px;" type="primary" @click="login" size="large">登录</el-button>
+        <el-button style="width: 100%;margin-top: 20px;" type="primary" @click="login()" size="large">登录</el-button>
       </el-form-item>
     </el-form>
   </div>

@@ -3,21 +3,21 @@ import axios from 'axios';
 const Api = {
     // 获取用户信息
     getUserInfo(params = '') {
-        return axios.post('/user/info', { params }, {
+        return axios.post('/api/user/info', { params }, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                token: `${localStorage.getItem('token')}`,
             },
         });
     },
 
     // 用户登录
     login(username, password) {
-        return axios.post('/user/login', { username, password });
+        return axios.post('/api/user/login', { username, password });
     },
 
     // 获取站点配置 传入{username:"",password:""} 返回{code:0,msg:"排队成功",data:username}
     getConfig(params = '') {
-        return axios.post('/config', { params });
+        return axios.post('/api/config', { params });
     },
 
     // 排队登录
@@ -32,7 +32,7 @@ const Api = {
 
     // 更新站点配置
     updateConfig(data) {
-        return axios.post('/config/update', data, {
+        return axios.post('/api/config/update', data, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
