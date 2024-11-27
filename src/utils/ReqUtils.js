@@ -3,7 +3,7 @@ import axios from 'axios';
 const Api = {
     // 获取用户信息
     getAdminInfo(params = '') {
-        return axios.post('/api/user/info', { params }, {
+        return axios.post('/api/admin/info', { params }, {
             headers: {
                 token: `${localStorage.getItem('token')}`,
             },
@@ -12,7 +12,7 @@ const Api = {
 
     // 用户登录
     adminLogin(username, password) {
-        return axios.post('/api/user/login', { username, password });
+        return axios.post('/api/admin/login', { username, password });
     },
 
     // 获取站点配置 传入{username:"",password:""} 返回{code:0,msg:"排队成功",data:username}
@@ -22,17 +22,17 @@ const Api = {
 
     // 排队登录
     queueLogin(username, password) {
-        return axios.post('/api/login/do', { username, password });
+        return axios.post('/api/user/login/do', { username, password });
     },
 
     // 检查排队状态
     checkQueueStatus(username) {
-        return axios.post('/api/login/check', { username });
+        return axios.post('/api/user/login/check', { username });
     },
 
     // 更新站点配置
     updateConfig(data) {
-        return axios.post('/api/config/update', data, {
+        return axios.post('/api/admin/config/update', data, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -41,7 +41,7 @@ const Api = {
 
 
     bindAccount(username, password, bindType, bindParams) {
-        return axios.post('/api/bind', {
+        return axios.post('/api/user/bind', {
             username,
             password,
             bind: { type: bindType, params: bindParams },
