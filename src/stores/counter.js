@@ -43,11 +43,6 @@ export const useCounterStore = defineStore('counter', () => {
     proxyUrl: "",
     proxyToken: ""
   })
-  const redis = ref({
-    redisHost: "",
-    redisPort: "",
-    redisPassword: ""
-  })
   const maxRetry = ref('')
   async function updateConfigApi() {
     const res = await updateConfig(configTemplate.value)
@@ -96,9 +91,7 @@ export const useCounterStore = defineStore('counter', () => {
       maxRetry.value = res.data.maxRetry
       wxpuserUidAdmin.value = res.data.wxpuserUidAdmin
 
-      redis.value.redisHost = res.data.redis.redisHost
-      redis.value.redisPort = res.data.redis.redisPort
-      redis.value.redisPassword = res.data.redis.redisPassword
+
 
 
     }
