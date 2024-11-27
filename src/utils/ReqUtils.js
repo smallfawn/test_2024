@@ -31,23 +31,31 @@ const Api = {
     },
 
     // 更新站点配置
-    updateConfig(data) {
+    updateAdminConfig(data) {
         return axios.post('/api/admin/config/update', data, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                token: `Bearer ${localStorage.getItem('token')}`,
             },
         });
     },
 
+    updateUserConfig(data) {
+        return axios.post('/api/user/config/update', data, {
+            headers: {
+                token: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+    },
 
     bindAccount(username, password, bindType, bindParams) {
+        //考虑Headers带Token 而不是直接传入用户名和密码
         return axios.post('/api/user/bind', {
             username,
             password,
             bind: { type: bindType, params: bindParams },
         });
     },
-    wait(ms){
+    wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 };

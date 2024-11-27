@@ -29,6 +29,9 @@ Headers 带入 token
 /admin/config/update
 Headers 带入 token
 传入要更改的数据例如{maxRetry:10}
+/user/config/update
+Headers 暂时带入用户 token
+传入要更改的数据例如{maxRetry:10}
 
 /user/bind
 { username:xxxx,password:"",bind:{type:"QQ",params:xxxx } } WXPUSER QQ TG WX
