@@ -9,6 +9,7 @@ const router = createRouter({
       name: '',
       component: Login,
     },
+
     {
       path: '/home',
       name: 'home',
@@ -27,6 +28,17 @@ const router = createRouter({
       ]
       
     },
+    /*{
+      path: '/AdminLogin',
+      name: '管理员登录',
+      component: () => import('../views/AdminLogin.vue'),
+    },
+    {
+      path: '/UserLogin',
+      name: '用户登录',
+
+      component: () => import('../views/UserLogin.vue'),
+    },*/
   ],
 })
 

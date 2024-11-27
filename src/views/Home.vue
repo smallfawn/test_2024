@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+
 import {
     Document,
     Menu as IconMenu,
@@ -56,8 +57,13 @@ const text = computed(()=>{
     }else if(current.value === '/home/setting'){
         return '系统设置'
     }
+
 })
+function login(params) {
+
+}
 </script>
+
 
 <style scoped>
 .container{
