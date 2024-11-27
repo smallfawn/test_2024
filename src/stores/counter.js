@@ -28,7 +28,7 @@ export const useCounterStore = defineStore('counter', () => {
   const wxpuserUid = ref('')
   const wxpuserUidAdmin = ref('')
   //定义公告
-  const notice = ref('')
+  const notice = ref('31231233123123312312331231233123123312312331231233123123312312331231233123123312312331231233123123312312331231233123123312312331')
   //定义网站名字
   const siteName = ref('')
   const QingLong = ref({
@@ -126,7 +126,7 @@ export const useCounterStore = defineStore('counter', () => {
     QingLong,
     isDecodeUsername,
     proxy,
-    redis,
+    // redis,
     maxRetry,
     ApiLoginDoApi,
     ApiLoginCheckApi,

@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import {h, onMounted, ref} from 'vue';
 import { User, Lock } from '@element-plus/icons-vue'
 import { useRouter } from "vue-router"
 import Api from '@/utils/ReqUtils';
+import {ElNotification} from "element-plus";
 const router = useRouter()
 
 const form = ref({
@@ -11,6 +12,9 @@ const form = ref({
   password: ""
 })
 const isLogin = ref(false)
+import { useCounterStore } from '../stores/counter'
+const announcement = useCounterStore().notice
+
 const login = () => {
 
   /**/
@@ -53,6 +57,22 @@ const login = () => {
     }
   }
 }
+
+const store = useCounterStore()
+
+const open = () => {
+  ElNotification({
+    title: '公告',
+    message: h('div', {
+      style: 'color: teal; white-space: normal; word-wrap: break-word; max-width: 400px;'
+    }, announcement),
+  });
+}
+
+
+onMounted(()=>{
+  open();
+})
 
 </script>
 
