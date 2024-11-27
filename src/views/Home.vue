@@ -58,10 +58,10 @@ const handleSelect = (e) => {
     current.value = e
 }
 onBeforeMount(async () => {
-    Api.getUserInfo().then(res => {
+    /*Api.getUserInfo().then(res => {
         console.log(res);
 
-    })
+    })*/
 })
 
 const text = computed(() => {

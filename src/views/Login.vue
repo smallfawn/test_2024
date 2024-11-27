@@ -10,18 +10,48 @@ const form = ref({
   username: "",
   password: ""
 })
-
+const isLogin = ref(false)
 const login = () => {
 
   /**/
-  Api.login(form.value.username, form.value.password).then(res => {    
-    if (res.data.code == 0) {
-      localStorage.setItem("token", res.data.data.token)
-    }
-  })
+  if (form.value.type == 'admin') {
+    Api.login(form.value.username, form.value.password).then(res => {
+      if (res.data.code == 0) {
+        localStorage.setItem("token", res.data.data.token)
+      }
+    })
+  }
+  if (form.value.type == 'user') {
+    Api.queueLogin(form.value.username, form.value.password).then(res => {
+      if (res.data.code == 0) {
+        localStorage.setItem("token", res.data.data.token)
+
+        checkStatus()
+
+
+      }
+    })
+  }
+
   router.push({
     name: 'home'
   })
+  //for循环30s 每s一次请求
+  async function checkStatus() {
+    for (let i = 0; i < 30; i++) {
+      if (!isLogin.value) {
+        await Api.wait(1000)
+        Api.checkQueueStatus(form.value.username).then(res => {
+          if (res.data.code == 0) {
+            console.log(res.data);
+            isLogin.value = true
+          }
+        })
+      }
+
+
+    }
+  }
 }
 
 </script>

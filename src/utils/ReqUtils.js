@@ -47,6 +47,9 @@ const Api = {
             bind: { type: bindType, params: bindParams },
         });
     },
+    wait(ms){
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 };
 
 export default Api;
