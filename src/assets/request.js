@@ -1,7 +1,7 @@
 import request from "./axios";
 async function getUserInfo(data) {
     return await request({
-        url: "/user/info",
+        url: "/api/user/info",
         method: "post",
         headers: {
             token: localStorage.getItem("token"),
@@ -13,7 +13,7 @@ async function getUserInfo(data) {
 //login
 async function getLoginToken(data) {
     return await request({
-        url: "/user/login",
+        url: "/api/user/login",
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -23,7 +23,7 @@ async function getLoginToken(data) {
 }
 async function getSiteConfig(data) {
     return await request({
-        url: "/config",
+        url: "/api/config",
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -61,7 +61,7 @@ async function ApiLoginCheck(data) {
  */
 async function updateConfig(data) {
     return await request({
-        url: "/config/update",
+        url: "/api/config/update",
         method: "post",
         headers: {
             token: localStorage.getItem("token"),

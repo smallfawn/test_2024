@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { User,Lock } from '@element-plus/icons-vue'
 import { useRouter } from "vue-router"
-
+import { getLoginToken } from "@/assets/request"
 const router = useRouter()
 
 const form = ref({
@@ -12,6 +12,9 @@ const form = ref({
 })
 
 const login = ()=>{
+
+  /**/ 
+  getLoginToken({username:form.value.username,password:form.value.password})
   router.push({
     name:'home'
   })
