@@ -34,7 +34,7 @@ const Api = {
     updateAdminConfig(data) {
         return axios.post('/api/admin/config/update', data, {
             headers: {
-                token: `Bearer ${localStorage.getItem('token')}`,
+                token: `${localStorage.getItem('token')}`,
             },
         });
     },
@@ -42,18 +42,24 @@ const Api = {
     updateUserConfig(data) {
         return axios.post('/api/user/config/update', data, {
             headers: {
-                token: `Bearer ${localStorage.getItem('token')}`,
+                token: `${localStorage.getItem('token')}`,
             },
         });
     },
 
-    bindAccount(username, password, bindType, bindParams) {
+    bindAccount(bindType, bindParams) {
         //考虑Headers带Token 而不是直接传入用户名和密码
         return axios.post('/api/user/bind', {
-            username,
-            password,
             bind: { type: bindType, params: bindParams },
-        });
+
+        },
+            {
+                headers: {
+                    token: `${localStorage.getItem('token')}`,
+                },
+            }
+        );
+
     },
     wait(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));

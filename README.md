@@ -21,7 +21,7 @@ Headers 带入 token
 
 /user/login/check
 传入{username:""}
-返回{code:0,msg:"登陆成功",data:pt_pin的值}
+返回{code:0,msg:"登陆成功",data:{pin:pt_pin 的值,token:"用于修改配置"}}
 返回{code:1,msg:"正在队列",data:''}
 返回{code:2,msg:"登录失败",data:''}
 返回{code:3,msg:"进入风控状态",data:风控链接}
