@@ -2,7 +2,7 @@ import axios from 'axios';
 /*api封装*/
 const Api = {
     // 获取用户信息
-    getUserInfo(params = '') {
+    getAdminInfo(params = '') {
         return axios.post('/api/user/info', { params }, {
             headers: {
                 token: `${localStorage.getItem('token')}`,
@@ -11,7 +11,7 @@ const Api = {
     },
 
     // 用户登录
-    login(username, password) {
+    adminLogin(username, password) {
         return axios.post('/api/user/login', { username, password });
     },
 

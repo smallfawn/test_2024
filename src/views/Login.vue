@@ -15,7 +15,7 @@ const login = () => {
 
   /**/
   if (form.value.type == 'admin') {
-    Api.login(form.value.username, form.value.password).then(res => {
+    Api.adminLogin(form.value.username, form.value.password).then(res => {
       if (res.data.code == 0) {
         localStorage.setItem("token", res.data.data.token)
       }

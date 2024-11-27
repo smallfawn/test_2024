@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import {
-  getUserInfo,
-  getLoginToken,
+  getAdminInfo,
+  getAdminLoginToken,
   getSiteConfig,
   ApiLoginDo,
   ApiLoginCheck, updateConfig
@@ -64,8 +64,8 @@ export const useCounterStore = defineStore('counter', () => {
     if (res.code == 0) {
     }
   }
-  async function getUserInfoApi(params) {
-    const res = await getUserInfo({ params: "" })
+  async function getAdminInfoApi(params) {
+    const res = await getAdminInfo({ params: "" })
     if (res.code == 0) {
       //获取后台配置情况
       //获取QL
@@ -96,8 +96,8 @@ export const useCounterStore = defineStore('counter', () => {
 
     }
   }
-  async function getLoginTokenApi() {
-    const res = await getLoginToken({ username: username.value, password: password.value })
+  async function getAdminLoginTokenApi() {
+    const res = await getAdminLoginToken({ username: username.value, password: password.value })
     if (res.code == 0) {
       userToken.value = res.data.token
     }

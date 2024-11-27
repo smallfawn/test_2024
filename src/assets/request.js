@@ -1,7 +1,7 @@
 import request from "./axios";
-async function getUserInfo(data) {
+async function getAdminInfo(data) {
     return await request({
-        url: "/api/user/info",
+        url: "/api/admin/info",
         method: "post",
         headers: {
             token: localStorage.getItem("token"),
@@ -11,9 +11,9 @@ async function getUserInfo(data) {
     });
 }
 //login
-async function getLoginToken(data) {
+async function getAdminLoginToken(data) {
     return await request({
-        url: "/api/user/login",
+        url: "/api/admin/login",
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ async function getSiteConfig(data) {
 //APILOGIN
 async function ApiLoginDo(data) {
     return await request({
-        url: "/api/login/do",
+        url: "/api/user/login/do",
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -45,7 +45,7 @@ async function ApiLoginDo(data) {
 //APILOGINCHECK
 async function ApiLoginCheck(data) {
     return await request({
-        url: "/api/login/check",
+        url: "/api/user/login/check",
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -61,7 +61,7 @@ async function ApiLoginCheck(data) {
  */
 async function updateConfig(data) {
     return await request({
-        url: "/api/config/update",
+        url: "/api/admin/config/update",
         method: "post",
         headers: {
             token: localStorage.getItem("token"),
@@ -79,7 +79,7 @@ async function updateConfig(data) {
  */
 async function ApiBindSet(data) {
     return await request({
-        url: "/api/bind",
+        url: "/api/user/bind",
         method: "post",
         headers: {
             "Content-Type": "application/json",
@@ -90,8 +90,8 @@ async function ApiBindSet(data) {
 
 
 export {
-    getUserInfo,//管理员接口 获取后台配置
-    getLoginToken,//管理员登录接口
+    getAdminInfo,//管理员接口 获取后台配置
+    getAdminLoginToken,//管理员登录接口
     getSiteConfig,//获取网站公告
     ApiLoginDo,//用户登录接口
     ApiLoginCheck,//用户检测登录状态接口
