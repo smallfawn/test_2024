@@ -1,9 +1,17 @@
+import { getAdminInfo } from '@/assets/request';
 import axios from 'axios';
 /*api封装*/
 const Api = {
     // 获取用户信息
     getAdminInfo(params = '') {
         return axios.post('/api/admin/info', { params }, {
+            headers: {
+                token: `${localStorage.getItem('token')}`,
+            },
+        });
+    },
+    getAdminData(params = '') {
+        return axios.post('/api/admin/data', { params }, {
             headers: {
                 token: `${localStorage.getItem('token')}`,
             },
