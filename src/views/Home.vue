@@ -74,6 +74,9 @@ const logout = () => {
         message: '退出成功',
         type: 'success'
     })
+    router.push({
+        name: 'main'
+    })
     console.log("执行退出登录操作");
 }
 onBeforeMount(async () => {
