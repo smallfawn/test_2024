@@ -12,7 +12,7 @@
         <el-input readonly disabled v-model="formData.PTPIN" style="width: 400px;"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" style="width: 100%;margin-top: 50px;">点击更新</el-button>
+        <el-button type="primary" style="width: 100%;margin-top: 50px;" size="large">点击更新</el-button>
       </el-form-item>
     </el-form>
   </div>
