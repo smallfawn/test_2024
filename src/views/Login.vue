@@ -7,14 +7,14 @@ const router = useRouter()
 import { ElNotification } from "element-plus";
 import { useCounterStore } from '@/stores/counter'
 const stores = useCounterStore()
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 const form = ref({
   type: "user",
   username: "",
   password: ""
 })
-const isLogin = ref(false)
+const isFlag = ref(false)
 const login = () => {
 
   /**/
@@ -53,33 +53,46 @@ const login = () => {
   //for循环30s 每s一次请求
   async function checkStatus() {
     for (let i = 0; i < 30; i++) {
-      if (!isLogin.value) {
+      if (!isFlag.value) {
         await Api.wait(2000)
         let { data: res } = await Api.checkQueueStatus(form.value.username)
         if (res.code == 0) {
           localStorage.setItem("token", res.data.token)
-          isLogin.value = true
+          isFlag.value = true
           Api.getUserInfo().then(res => {
             //
           })
           router.push({
             name: 'home'
           })
+          return
         }
         if (res.code == 2) {
+          ElMessageBox.confirm('账号或密码错误', '警告')
+            .then(() => {
+
+            });
           //账号或密码错误
+          return
         }
         if (res.code == 3) {
           //账号被风控 这里弹窗让用户跳转到风控链接
+          ElMessageBox.confirm('账号存在风险，请点击确认进入链接进行验证,验证通过后再次提交即可', '警告')
+            .then(() => {
+              window.open(res.data);
+            });
+          return;
         }
-
-
 
       }
 
 
+
     }
+
+
   }
+}
 }
 
 const open = () => {
