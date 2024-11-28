@@ -2,6 +2,7 @@
     <div v-if="stores.loginType == 'admin'">
         系统管理
         当前版本:内测版
+        管理admin/userinfo返回
     </div>
     <div v-if="stores.loginType == 'user'">
         系统公告

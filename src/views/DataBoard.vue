@@ -16,7 +16,11 @@
       </el-form-item>
     </el-form>
   </div>
-  <div v-if="stores.loginType == 'admin'"></div>
+  <div v-if="stores.loginType == 'admin'">
+
+
+    显示所有CK列表
+  </div>
 </template>
 
 <script setup>
