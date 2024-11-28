@@ -68,7 +68,7 @@ const login = () => {
           return
         }
         if (res.code == 2) {
-          ElMessageBox.confirm('账号或密码错误', '警告')
+          ElMessageBox.confirm(res.msg, '警告')
             .then(() => {
 
             });
