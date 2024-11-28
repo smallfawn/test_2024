@@ -33,12 +33,12 @@ const formData = ref({
   pin: "",
   remark: ""
 })
-onMounted(() => {
-  document.getElementById("qrcode").src = wxpusherQrcode.value
 
-})
 if (stores.loginType == 'user') {
+  onMounted(() => {
+    document.getElementById("qrcode").src = wxpusherQrcode.value
 
+  })
 }
 
 </script>
