@@ -1,9 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref, h } from 'vue';
 import { User, Lock } from '@element-plus/icons-vue'
 import { useRouter } from "vue-router"
 import Api from '@/utils/ReqUtils';
 const router = useRouter()
+import { ElNotification } from "element-plus";
+import { useCounterStore } from '@/stores/counter'
+const stores = useCounterStore()
 
 const form = ref({
   type: "user",
@@ -53,6 +56,24 @@ const login = () => {
     }
   }
 }
+
+const open = () => {
+  ElNotification({
+    title: stores.siteName,
+    message: stores.notice,
+    type: 'success',
+    duration: 0
+  });
+}
+onMounted(() => {
+  Api.getConfig().then(res => {
+    stores.notice = res.data.data.notice
+    stores.siteName = res.data.data.siteName
+    stores.maxRetry = res.data.data.maxRetry
+    open();
+  })
+
+})
 
 </script>
 
