@@ -26,6 +26,9 @@ Headers 带入 token
 返回{code:2,msg:"登录失败",data:''}
 返回{code:3,msg:"进入风控状态",data:风控链接}
 
+/user/info Headers 带入用户 token
+返回用户信息 
+
 /admin/config/update
 Headers 带入 token
 传入要更改的数据例如{maxRetry:10}

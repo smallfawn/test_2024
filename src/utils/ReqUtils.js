@@ -15,6 +15,15 @@ const Api = {
         return axios.post('/api/admin/login', { username, password });
     },
 
+    // 更新站点配置
+    updateAdminConfig(data) {
+        return axios.post('/api/admin/config/update', data, {
+            headers: {
+                token: `${localStorage.getItem('token')}`,
+            },
+        });
+    },
+
     // 获取站点配置 传入{username:"",password:""} 返回{code:0,msg:"排队成功",data:username}
     getConfig(params = '') {
         return axios.post('/api/config', { params });
@@ -30,15 +39,14 @@ const Api = {
         return axios.post('/api/user/login/check', { username });
     },
 
-    // 更新站点配置
-    updateAdminConfig(data) {
-        return axios.post('/api/admin/config/update', data, {
+    // 获取用户信息
+    getUserInfo(params = '') {
+        return axios.post('/api/user/info', { params }, {
             headers: {
                 token: `${localStorage.getItem('token')}`,
             },
         });
     },
-
     updateUserConfig(data) {
         return axios.post('/api/user/config/update', data, {
             headers: {
