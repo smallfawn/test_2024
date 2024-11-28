@@ -12,5 +12,16 @@
 import { useCounterStore } from '@/stores/counter'
 const stores = useCounterStore()
 console.log(stores.loginType);
+import Api from '@/utils/ReqUtils'
+import { onMounted } from 'vue'
+if (stores.loginType == 'admin') {
+    Api.getAdminInfo().then(res => {
+        console.log(res.data);
+        if (res.data.code == 0) {
+
+        }
+
+    })
+}
 
 </script>

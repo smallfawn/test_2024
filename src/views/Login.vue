@@ -17,6 +17,7 @@ const form = ref({
 const isFlag = ref(false)
 const login = () => {
   stores.loginType = form.value.type
+  localStorage.setItem("loginType", form.value.type)
   /**/
   if (form.value.type == 'admin') {
     Api.adminLogin(form.value.username, form.value.password).then(res => {
