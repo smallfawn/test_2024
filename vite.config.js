@@ -25,7 +25,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {  // 这里的'/api'是一个示例，代表要代理的请求路径前缀，你可以根据实际需求修改
-        target: 'http://127.0.0.1:8866',  // 将请求代理到这个目标地址
+        target: 'http://127.0.0.1:6789',  // 将请求代理到这个目标地址
         changeOrigin: true,  // 改变请求源，让服务器以为请求是来自于浏览器端，很重要的配置项
       }
     }
