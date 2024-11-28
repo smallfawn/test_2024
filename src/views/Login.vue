@@ -54,23 +54,27 @@ const login = () => {
   async function checkStatus() {
     for (let i = 0; i < 30; i++) {
       if (!isLogin.value) {
-        await Api.wait(1000)
-        Api.checkQueueStatus(form.value.username).then(res => {
-          if (res.data.code == 0) {
-            localStorage.setItem("token", res.data.data.token)
-            router.push({
-              name: 'home'
-            })
-          }
-          if (res.data.code == 2) {
-            //账号或密码错误
-          }
-          if (res.data.code == 3) {
-            //账号被风控 这里弹窗让用户跳转到风控链接
-          }
+        await Api.wait(2000)
+        let { data: res } = await Api.checkQueueStatus(form.value.username)
+        if (res.code == 0) {
+          localStorage.setItem("token", res.data.token)
+          isLogin.value = true
+          Api.getUserInfo().then(res => {
+            //
+          })
+          router.push({
+            name: 'home'
+          })
+        }
+        if (res.code == 2) {
+          //账号或密码错误
+        }
+        if (res.code == 3) {
+          //账号被风控 这里弹窗让用户跳转到风控链接
+        }
 
 
-        })
+
       }
 
 
