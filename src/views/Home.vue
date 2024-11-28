@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="aside">
-            <el-menu background-color="#545c64" class="menu" @select="handleSelect" text-color="#fff" router
+        <div :class="['aside']">
+            <el-menu background-color="#545c64" class="menu" @select="handleSelect" text-color="#fff" router :collapse="activedMenu"
                 :default-active="actived">
                 <div class="top">
                     <a>
@@ -26,7 +26,7 @@
         </div>
         <div class="main">
             <div class="toggle">
-                <el-icon class="toggle-icon" size="20">
+                <el-icon class="toggle-icon" size="20" @click="changeActive">
                     <Fold />
                 </el-icon>
                 <span>{{ text }}</span>
@@ -49,6 +49,11 @@ import {
     Fold
 } from '@element-plus/icons-vue'
 import { computed, ref, onBeforeMount } from 'vue';
+
+let activedMenu = ref(false)
+const changeActive = ()=>{
+    activedMenu.value = !activedMenu.value
+}
 
 const actived = "/home/dataBoard"
 
@@ -74,6 +79,12 @@ const text = computed(() => {
 })
 
 </script>
+<style>
+.menu:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+</style>
 
 
 <style scoped>
@@ -119,12 +130,25 @@ const text = computed(() => {
 }
 
 .aside {
-    width: 200px;
+    /* width: 200px; */
     height: 100%;
 }
 
+.aside-active{
+    width: 50px;
+}
+
+.aside-active .menu{
+    width: 50px;
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
+}
+
 .menu {
-    width: 200px;
+    /* width: 200px; */
     height: 100%;
     background-color: rgb(48, 65, 86);
 }
