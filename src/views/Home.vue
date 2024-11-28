@@ -1,8 +1,8 @@
 <template>
     <div class="container">
         <div :class="['aside']">
-            <el-menu background-color="#545c64" class="menu" @select="handleSelect" text-color="#fff" router :collapse="activedMenu"
-                :default-active="actived">
+            <el-menu background-color="#545c64" class="menu" @select="handleSelect" text-color="#fff" router
+                :collapse="activedMenu" :default-active="actived">
                 <div class="top">
                     <a>
                         <img class="top-logo" src="../assets/logo.png" />
@@ -29,6 +29,9 @@
                 <el-icon class="toggle-icon" size="20" @click="changeActive">
                     <Fold />
                 </el-icon>
+                <div class="logout-btn-wrapper"> <!-- 新增包裹按钮的容器，方便后续样式调整 -->
+                    <el-button type="danger" @click="logout">退出登录</el-button> <!-- 新增退出登录按钮，设置类型为危险（红色） -->
+                </div>
                 <span>{{ text }}</span>
             </div>
             <RouterView />
@@ -39,7 +42,6 @@
 
 <script setup>
 
-import Api from '@/utils/ReqUtils';
 import {
     Document,
     Menu as IconMenu,
@@ -49,9 +51,12 @@ import {
     Fold
 } from '@element-plus/icons-vue'
 import { computed, ref, onBeforeMount } from 'vue';
-
+import { useRouter } from "vue-router"
+import Api from '@/utils/ReqUtils';
+import { ElMessage } from 'element-plus'
+const router = useRouter()
 let activedMenu = ref(false)
-const changeActive = ()=>{
+const changeActive = () => {
     activedMenu.value = !activedMenu.value
 }
 
@@ -62,11 +67,28 @@ const current = ref("/home/dataBoard")
 const handleSelect = (e) => {
     current.value = e
 }
-onBeforeMount(async () => {
-    /*Api.getAdminInfo().then(res => {
-        console.log(res);
 
-    })*/
+const logout = () => {
+    localStorage.removeItem('token')
+    ElMessage({
+        message: '退出成功',
+        type: 'success'
+    })
+    console.log("执行退出登录操作");
+}
+onBeforeMount(async () => {
+    if (localStorage.getItem('token')) {
+
+    } else {
+        ElMessage({
+            message: '请重新登录',
+            type: 'warning'
+        })
+        //请重新登录
+        router.push({
+            name: 'main'
+        })
+    }
 })
 
 const text = computed(() => {
@@ -81,8 +103,23 @@ const text = computed(() => {
 </script>
 <style>
 .menu:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
+    width: 200px;
+    min-height: 400px;
+}
+
+.logout-btn-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    /* 使其靠右显示 */
+    padding: 10px;
+    /* 根据需求调整内边距 */
+}
+
+.el-button--danger {
+    background-color: rgba(77, 77, 187, 0.774);
+    /* 确保按钮为红色，可根据设计微调颜色值 */
+    border-color: rgba(77, 77, 187, 0.774);
+    /* 边框颜色与背景一致 */
 }
 </style>
 
@@ -134,17 +171,17 @@ const text = computed(() => {
     height: 100%;
 }
 
-.aside-active{
+.aside-active {
     width: 50px;
 }
 
-.aside-active .menu{
+.aside-active .menu {
     width: 50px;
 }
 
 .el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
+    width: 200px;
+    min-height: 400px;
 }
 
 .menu {
