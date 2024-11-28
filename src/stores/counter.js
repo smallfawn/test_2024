@@ -14,6 +14,7 @@ export const useCounterStore = defineStore('counter', () => {
   //定义cookie remark
   const userRemark = ref('')
   const userCookie = ref('')
+  const userPin = ref('')
   //定义bind 和 params
   const userBind = ref({
     typeof: '',
@@ -60,6 +61,7 @@ export const useCounterStore = defineStore('counter', () => {
     isDecodeUsername,
     proxy,
     maxRetry,
-    loginType
+    loginType,
+    userPin
   }
 })
