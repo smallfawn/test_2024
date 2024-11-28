@@ -7,6 +7,7 @@ const router = useRouter()
 import { ElNotification } from "element-plus";
 import { useCounterStore } from '@/stores/counter'
 const stores = useCounterStore()
+import { ElMessage } from 'element-plus'
 
 const form = ref({
   type: "user",
@@ -20,25 +21,35 @@ const login = () => {
   if (form.value.type == 'admin') {
     Api.adminLogin(form.value.username, form.value.password).then(res => {
       if (res.data.code == 0) {
+        ElMessage({
+          message: '登录成功',
+          type: 'success'
+        })
+        router.push({
+          name: 'home'
+        })
         localStorage.setItem("token", res.data.data.token)
+        Api.getAdminInfo().then(res => {
+          if (res.data.code == 0) {
+
+          }
+
+
+        })
       }
     })
   }
   if (form.value.type == 'user') {
     Api.queueLogin(form.value.username, form.value.password).then(res => {
       if (res.data.code == 0) {
-        localStorage.setItem("token", res.data.data.token)
-
         checkStatus()
-
-
       }
+
     })
   }
 
-  router.push({
-    name: 'home'
-  })
+
+
   //for循环30s 每s一次请求
   async function checkStatus() {
     for (let i = 0; i < 30; i++) {
@@ -46,9 +57,19 @@ const login = () => {
         await Api.wait(1000)
         Api.checkQueueStatus(form.value.username).then(res => {
           if (res.data.code == 0) {
-            console.log(res.data);
-            isLogin.value = true
+            localStorage.setItem("token", res.data.data.token)
+            router.push({
+              name: 'home'
+            })
           }
+          if (res.data.code == 2) {
+            //账号或密码错误
+          }
+          if (res.data.code == 3) {
+            //账号被风控 这里弹窗让用户跳转到风控链接
+          }
+
+
         })
       }
 
@@ -81,7 +102,7 @@ onMounted(() => {
   <div class="login">
     <el-form class="login-form">
       <div class="title">
-        鹿飞后台管理系统
+        Lufly Center
       </div>
       <el-form-item label="类型：">
         <el-radio-group v-model="form.type">

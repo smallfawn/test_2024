@@ -6,7 +6,7 @@
                 <div class="top">
                     <a>
                         <img class="top-logo" src="../assets/logo.png" />
-                        <h1 class="top-title">鹿飞管理系统</h1>
+                        <h1 class="top-title">Lufly Center</h1>
                     </a>
 
                 </div>
