@@ -10,13 +10,13 @@ const stores = useCounterStore()
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 const form = ref({
-  type: "user",
+  type: 'user',
   username: "",
   password: ""
 })
 const isFlag = ref(false)
 const login = () => {
-
+  stores.loginType = form.value.type
   /**/
   if (form.value.type == 'admin') {
     Api.adminLogin(form.value.username, form.value.password).then(res => {

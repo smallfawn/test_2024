@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCounterStore = defineStore('counter', () => {
-
+  const loginType = ref('user')
   //定义用户名和密码
   const adminUsername = ref('S')
   const adminPassword = ref('')
@@ -59,7 +59,7 @@ export const useCounterStore = defineStore('counter', () => {
     QingLong,
     isDecodeUsername,
     proxy,
-    maxRetry
-
+    maxRetry,
+    loginType
   }
 })
